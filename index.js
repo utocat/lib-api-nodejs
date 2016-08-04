@@ -89,7 +89,6 @@ module.exports = function (options) {
           console.log('error deploying the contract');
         } else {
           console.log('contract deployed successfully');
-          console.log(body);
           if (body.errorText)
           {
             callBack(body.errorText, null);
