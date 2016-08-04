@@ -1,0 +1,14 @@
+{
+  "name": "lib-blockchainiz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "SEE LICENSE IN FILE : LICENSE",
+  "dependencies": {
+    "request": "^2.74.0"
+  }
+}
