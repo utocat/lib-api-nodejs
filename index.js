@@ -40,7 +40,7 @@ module.exports = function (options) {
           body: rawBody
         },
           function (err, res, body) {
-            if (err && res.statusCode !== 201 ) {
+            if (err && res.statusCode !== 201) {
               console.log('error deploying the contract');
             } else {
               console.log('contract deployed successfully');
@@ -69,12 +69,12 @@ module.exports = function (options) {
     // create the HMAC token that will be used to authorize the transaction on the blockchainiz API
     // we use a different URL for blockchainiz according to the fact that we are in debug or test mode
     var hash = crypto.createHmac('SHA512', options.private)
-      .update(nonce + options.url + '/contract/ethereum/solidity/'+ id +'/'+functionName + JSON.stringify(rawBody))
+      .update(nonce + options.url + '/contract/ethereum/solidity/' + id + '/' + functionName + JSON.stringify(rawBody))
       .digest('hex');
 
     // make the request to blockchainiz to add the new entry in the smart contract
     request({
-      url: options.url + '/contract/ethereum/solidity/'+ id +'/'+functionName,
+      url: options.url + '/contract/ethereum/solidity/' + id + '/' + functionName,
       headers: {
         'x-Api-Key': options.public,
         'x-Api-Signature': hash,
@@ -90,7 +90,13 @@ module.exports = function (options) {
         } else {
           console.log('contract deployed successfully');
           console.log(body);
-          callBack(body);
+          if (body.errorText)
+          {
+            callBack(body.errorText, null);
+          } else {
+            callBack(null, body.result);
+
+          }
         }
       });
 
@@ -111,12 +117,12 @@ module.exports = function (options) {
     // create the HMAC token that will be used to authorize the transaction on the blockchainiz API
     // we use a different URL for blockchainiz according to the fact that we are in debug or test mode
     var hash = crypto.createHmac('SHA512', options.private)
-      .update(nonce + options.url + '/contract/'+ id )
+      .update(nonce + options.url + '/contract/' + id)
       .digest('hex');
 
     // make the request to blockchainiz to add the new entry in the smart contract
     request({
-      url: options.url + '/contract/'+ id ,
+      url: options.url + '/contract/' + id,
       headers: {
         'x-Api-Key': options.public,
         'x-Api-Signature': hash,
