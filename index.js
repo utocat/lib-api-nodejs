@@ -13,7 +13,7 @@ module.exports = function (options) {
     
    var that = this;
 
-    var socket = require('socket.io-client')(options.url,  {path: options.path});
+    var socket = require('socket.io-client')(options.socketio.url,  {path: options.socketio.path});
     socket.on('connect', function () {
       console.log("connecter by socket io to blockchainiz");
     });
